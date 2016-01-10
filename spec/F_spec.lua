@@ -46,5 +46,14 @@ describe("string interpolation", function()
 				end
 			end)()()
 		end
+		do
+			(function()
+				local _ENV = {x = "foo"}
+				return function()
+					assert.same("foo", x) -- reference the upvalue
+					assert.same("foo", F'{x}')
+				end
+			end)()()
+		end
 	end)
 end)
